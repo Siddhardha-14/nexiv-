@@ -24,18 +24,17 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[var(--bg-primary)]/80 backdrop-blur-md border-b border-[var(--border-subtle)]"
+          ? "bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm"
           : "bg-transparent border-b border-transparent"
       }`}
     >
-
       <div className="section-container flex items-center justify-between h-[80px]">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-md bg-[var(--bg-elevated)] border border-[var(--border-subtle)] flex items-center justify-center font-bold text-[var(--text-primary)] text-sm">
+        <Link href="/" className="flex items-center gap-2.5 group">
+          <div className="w-9 h-9 rounded-xl bg-[#FF4B3A] shadow-md shadow-orange-200 flex items-center justify-center font-extrabold text-white text-lg transition-transform group-hover:scale-105">
             N
           </div>
-          <span className="text-xl font-bold text-[var(--text-primary)] tracking-tight">
+          <span className="text-xl font-bold text-[#1A1A1A] tracking-tight">
             Nexiv
           </span>
         </Link>
@@ -46,7 +45,7 @@ export default function Navbar() {
             <a
               key={link.label}
               href={link.href}
-              className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors duration-200 text-sm font-medium"
+              className="text-[#575757] hover:text-[#FF4B3A] transition-colors duration-200 text-[15px] font-medium"
             >
               {link.label}
             </a>
@@ -54,21 +53,18 @@ export default function Navbar() {
         </div>
 
         {/* CTA Buttons */}
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden md:flex items-center gap-4">
           <Link
             href="/auth/login"
-            className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all duration-200 text-sm font-medium px-4 py-2 rounded-lg hover:bg-white/[0.04]"
+            className="text-[#575757] hover:text-[#1A1A1A] transition-all duration-200 text-[15px] font-semibold px-2"
           >
             Log in
           </Link>
           <Link
             href="/auth/signup"
-            className="btn-primary text-sm py-2.5 px-6 rounded-xl inline-flex items-center"
+            className="btn-primary text-[14px] py-2.5 px-6 rounded-full shadow-orange-100 inline-flex items-center"
           >
             Get Started
-            <svg className="w-4 h-4 ml-1.5 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
           </Link>
         </div>
 
@@ -79,17 +75,17 @@ export default function Navbar() {
           aria-label="Toggle menu"
         >
           <span
-            className={`w-6 h-0.5 bg-[var(--text-primary)] transition-all duration-300 ${
+            className={`w-6 h-0.5 bg-[#1A1A1A] transition-all duration-300 ${
               mobileOpen ? "rotate-45 translate-y-2" : ""
             }`}
           />
           <span
-            className={`w-6 h-0.5 bg-[var(--text-primary)] transition-all duration-300 ${
+            className={`w-6 h-0.5 bg-[#1A1A1A] transition-all duration-300 ${
               mobileOpen ? "opacity-0" : ""
             }`}
           />
           <span
-            className={`w-6 h-0.5 bg-[var(--text-primary)] transition-all duration-300 ${
+            className={`w-6 h-0.5 bg-[#1A1A1A] transition-all duration-300 ${
               mobileOpen ? "-rotate-45 -translate-y-2" : ""
             }`}
           />
@@ -98,32 +94,31 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden glass-strong overflow-hidden transition-all duration-300 ${
-          mobileOpen ? "max-h-80 border-t border-[var(--border-subtle)]" : "max-h-0"
+        className={`md:hidden bg-white shadow-xl overflow-hidden transition-all duration-300 absolute w-full ${
+          mobileOpen ? "max-h-[400px] border-b border-gray-100" : "max-h-0"
         }`}
       >
-        <div className="section-container py-4 flex flex-col gap-3">
+        <div className="px-6 py-6 flex flex-col gap-4">
           {navLinks.map((link, i) => (
             <a
               key={link.label}
               href={link.href}
               onClick={() => setMobileOpen(false)}
-              className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors py-2 text-sm font-medium"
-              style={{ animationDelay: `${i * 0.05}s` }}
+              className="text-[#4A4A4A] hover:text-[#FF4B3A] font-medium transition-colors py-2 border-b border-gray-50"
             >
               {link.label}
             </a>
           ))}
-          <div className="flex flex-col gap-2 pt-3 border-t border-[var(--border-subtle)]">
+          <div className="flex flex-col gap-3 pt-4">
             <Link
               href="/auth/login"
-              className="btn-secondary text-center text-sm py-2.5"
+              className="btn-secondary text-center text-sm py-3"
             >
               Log in
             </Link>
             <Link
               href="/auth/signup"
-              className="btn-primary text-center text-sm py-2.5"
+              className="btn-primary text-center text-sm py-3"
             >
               Get Started
             </Link>

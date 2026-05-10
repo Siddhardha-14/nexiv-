@@ -1,76 +1,116 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { stats } from "@/data/siteData";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-[80px]">
+    <section className="relative min-h-screen flex items-center justify-center pt-[100px] pb-20 overflow-hidden bg-[#FFFDFB]">
+      {/* Subtle Background Texture/Shapes */}
+      <div className="absolute top-0 right-0 w-2/3 h-full bg-[#FFF3E3] rounded-l-[120px] -z-10 hidden lg:block" />
+      
+      <div className="section-container grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+        {/* Left Column: Content */}
+        <div className="text-left max-w-xl mx-auto lg:mx-0 animate-slide-up">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#FFE5D3] border border-[#FFD7C2] text-xs font-bold text-[#D14000] mb-6">
+            <span className="flex h-2 w-2 relative">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF4B3A] opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FF4B3A]"></span>
+            </span>
+            Enrollment Open for 2026
+          </div>
 
-      {/* Content */}
-      <div className="section-container relative z-10 text-center max-w-4xl mx-auto px-6">
-        <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-[var(--border-subtle)] bg-[var(--bg-elevated)] text-xs font-medium text-[var(--text-secondary)] mb-10 animate-slide-up">
-          <span className="w-1.5 h-1.5 rounded-full bg-[var(--text-primary)]" />
-          Now open for early access
-        </div>
+          <h1 className="text-5xl sm:text-6xl lg:text-[68px] font-black tracking-tight leading-[1.1] text-[#1A1A1A] mb-6">
+            Learn with us <br className="hidden sm:block" />
+            anywhere <br className="hidden sm:block" />
+            <span className="text-[#FF4B3A] relative inline-block">
+              anytime.
+              <svg className="absolute -bottom-2 left-0 w-full h-3 text-[#FFD7C2] -z-10" viewBox="0 0 200 9" fill="none">
+                <path d="M2.0002 7.00003C33.3335 2.33336 99.2002 -1.39997 198 7.00003" stroke="currentColor" strokeWidth="4" strokeLinecap="round"/>
+              </svg>
+            </span>
+          </h1>
 
-        {/* Headline */}
-        <h1
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.08] tracking-[-0.02em] mb-7 animate-slide-up"
-          style={{ animationDelay: "0.1s" }}
-        >
-          <span className="text-[var(--text-muted)]">Learner</span>
-          <br />
-          to <span className="text-[var(--text-primary)]">Builder.</span>
-        </h1>
+          <p className="text-[17px] text-[#575757] mb-10 leading-relaxed font-medium max-w-[460px]">
+            Discover a wide range of courses covering various subjects, from technology to languages, taught by experts from around the world.
+          </p>
 
-        {/* Subtitle */}
-        <p className="text-lg md:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto mb-12 leading-relaxed animate-slide-up" style={{ animationDelay: "0.2s" }}>
-          Master engineering skills through{" "}
-          <span className="text-[var(--text-primary)] font-semibold">real-world projects</span>,{" "}
-          <span className="text-[var(--text-primary)] font-semibold">expert mentorship</span>, and{" "}
-          <span className="text-[var(--text-primary)] font-semibold">portfolio-driven</span> career acceleration.
-        </p>
-
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-20 animate-slide-up" style={{ animationDelay: "0.3s" }}>
-          <Link
-            href="/auth/signup"
-            className="btn-primary text-base py-4 px-9 rounded-xl inline-flex items-center gap-2 w-full sm:w-auto justify-center group"
-          >
-            Start Building Free
-            <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-          </Link>
-          <a
-            href="#tracks"
-            className="btn-secondary text-base py-4 px-9 rounded-xl inline-flex items-center gap-2 w-full sm:w-auto justify-center group"
-          >
-            Explore Tracks
-            <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-            </svg>
-          </a>
-        </div>
-
-        {/* Stats Bar */}
-        <div className="animate-slide-up" style={{ animationDelay: "0.4s" }}>
-          <div className="border border-[var(--border-subtle)] bg-[var(--bg-secondary)] rounded-xl p-7 md:p-9 inline-flex flex-wrap gap-10 md:gap-16 justify-center">
-            {stats.map((stat, i) => (
-              <div key={i} className="text-center">
-                <div className="text-2xl md:text-3xl font-bold text-[var(--text-primary)] mb-1.5 tracking-tight">
-                  {stat.value}
-                </div>
-                <div className="text-xs md:text-sm text-[var(--text-muted)] font-medium uppercase tracking-widest">
-                  {stat.label}
-                </div>
+          <div className="flex flex-wrap gap-4 mb-12">
+            <Link
+              href="/auth/signup"
+              className="btn-primary py-4 px-10 text-base font-bold rounded-full shadow-[0_10px_30px_rgba(255,75,58,0.25)]"
+            >
+              Join for Free
+            </Link>
+            <a
+              href="#tracks"
+              className="inline-flex items-center gap-3 font-bold text-[#1A1A1A] hover:text-[#FF4B3A] transition-colors py-4 px-6"
+            >
+              <div className="w-12 h-12 rounded-full bg-white shadow-md flex items-center justify-center">
+                <svg className="w-5 h-5 translate-x-0.5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
               </div>
-            ))}
+              Watch Demo
+            </a>
+          </div>
+
+          {/* Mini Stats Container */}
+          <div className="grid grid-cols-3 gap-4 pt-6 border-t border-gray-100">
+             {stats.slice(0, 3).map((stat, i) => (
+               <div key={i} className="flex flex-col">
+                 <span className="text-2xl font-black text-[#1A1A1A]">{stat.value}</span>
+                 <span className="text-[13px] font-medium text-[#8C8C8C]">{stat.label}</span>
+               </div>
+             ))}
           </div>
         </div>
-      </div>
 
+        {/* Right Column: Visual Illustration Area */}
+        <div className="relative flex items-center justify-center lg:h-[600px] w-full animate-fade-in delay-200">
+          {/* Main Image Card Container */}
+          <div className="relative z-20 bg-white p-4 rounded-[40px] shadow-[0_32px_60px_rgba(0,0,0,0.07)] w-[90%] aspect-square md:w-[500px] md:h-[500px] flex items-center justify-center overflow-hidden">
+             <Image 
+               src="/images/auth_illustration.png" 
+               alt="Premium education visual" 
+               fill 
+               className="object-cover p-8"
+               priority
+             />
+          </div>
+
+          {/* Floating Badges for dynamic UI feel */}
+          <div className="absolute top-10 left-[5%] md:-left-4 bg-white p-4 rounded-2xl shadow-xl flex items-center gap-3 z-30 animate-bounce-slow">
+             <div className="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center text-green-600">
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+             </div>
+             <div>
+               <p className="text-sm font-black text-[#1A1A1A]">Professional Courses</p>
+               <p className="text-xs font-medium text-gray-500">Expert Instructors</p>
+             </div>
+          </div>
+
+          <div className="absolute bottom-12 right-[5%] md:-right-6 bg-white p-4 rounded-2xl shadow-xl flex items-center gap-4 z-30 animate-bounce-slow" style={{ animationDelay: "1s" }}>
+             <div className="flex -space-x-3">
+               {[1,2,3].map(i => (
+                 <div key={i} className={`w-9 h-9 rounded-full border-2 border-white bg-orange-${i*100+200} flex items-center justify-center text-xs font-bold`}>
+                   👤
+                 </div>
+               ))}
+             </div>
+             <div>
+               <p className="text-sm font-black text-[#1A1A1A]">2K+ Enrolled</p>
+               <div className="flex text-yellow-400 w-3 h-3">
+                 {[1,2,3,4,5].map(j => <span key={j}>★</span>)}
+               </div>
+             </div>
+          </div>
+          
+          {/* Circles in Bg for extra pop */}
+          <div className="absolute -z-10 w-64 h-64 bg-orange-200/40 rounded-full blur-3xl top-20 right-20" />
+        </div>
+      </div>
     </section>
   );
 }

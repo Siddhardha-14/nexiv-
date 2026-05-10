@@ -2,56 +2,42 @@
 
 import { projects } from "@/data/siteData";
 
-const difficultyColors: Record<string, string> = {
-  Beginner: "#10B981",
-  Intermediate: "#F59E0B",
-  Advanced: "#EF4444",
-};
-
-const trackGradients: Record<string, [string, string]> = {
-  iot: ["#10B981", "#06B6D4"],
-  python: ["#3B82F6", "#2563FF"],
-  "embedded-systems": ["#F59E0B", "#EF4444"],
-  "ui-ux-design": ["#EC4899", "#7C3AED"],
-  networking: ["#8B5CF6", "#3B82F6"],
-  "data-analytics": ["#06B6D4", "#10B981"],
-};
-
 export default function FeaturedProjects() {
   return (
-    <section id="projects" className="relative section-padding overflow-hidden bg-[var(--bg-primary)]">
+    <section id="projects" className="relative section-padding overflow-hidden bg-[#FFF8F2]">
       <div className="section-container relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
-          <span className="section-label justify-center">
+          <span className="inline-block px-3 py-1 rounded-md bg-orange-100 text-[#FF4B3A] text-xs font-bold uppercase tracking-wider mb-3">
             Real Projects
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-5 tracking-tight">
-            Featured <span className="text-[var(--text-primary)]">Projects</span>
+          <h2 className="text-3xl md:text-5xl font-black mb-5 tracking-tight text-[#1A1A1A]">
+            Featured <span className="text-[#FF4B3A]">Projects</span>
           </h2>
-          <p className="text-[var(--text-secondary)] max-w-2xl mx-auto text-lg leading-relaxed">
+          <p className="text-[#575757] max-w-2xl mx-auto text-lg leading-relaxed font-medium">
             Build industry-grade projects that solve real engineering problems.
             Each project adds directly to your professional portfolio.
           </p>
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, index) => {
-            const gradient = trackGradients[project.trackId] || ["#2563FF", "#00E5FF"];
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {projects.map((project) => {
             return (
               <div
                 key={project.id}
-                className="group card-surface border border-[var(--border-subtle)] overflow-hidden cursor-pointer hover:bg-[var(--bg-elevated)] transition-all duration-300"
+                className="group bg-white rounded-[32px] overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_50px_rgba(255,75,58,0.12)] transition-all duration-500 flex flex-col transform hover:-translate-y-1.5"
               >
                 {/* Project Image Area */}
                 <div
-                  className="relative h-48 flex items-center justify-center overflow-hidden border-b border-[var(--border-subtle)] bg-[var(--bg-secondary)]"
+                  className="relative h-52 flex items-center justify-center overflow-hidden bg-[#FFFDFB] border-b border-gray-50"
                 >
-
+                  {/* Background Accents for visual flair */}
+                  <div className="absolute w-40 h-40 rounded-full bg-orange-100 blur-3xl opacity-40 scale-0 group-hover:scale-100 transition-transform duration-700" />
+                  
                   {/* Track icon */}
-                  <div className="relative z-10 w-16 h-16 rounded-xl flex items-center justify-center text-3xl transition-all duration-300 group-hover:scale-105 border border-[var(--border-subtle)] bg-[var(--bg-primary)]">
-                    <span className="opacity-80">
+                  <div className="relative z-10 w-20 h-20 rounded-3xl bg-white shadow-md flex items-center justify-center text-4xl transition-transform duration-500 group-hover:scale-110">
+                    <span>
                       {project.trackId === "iot" && "🌐"}
                       {project.trackId === "python" && "🐍"}
                       {project.trackId === "embedded-systems" && "⚡"}
@@ -62,26 +48,26 @@ export default function FeaturedProjects() {
                   </div>
 
                   {/* Difficulty Badge */}
-                  <span className="absolute top-3 right-3 px-2.5 py-1 rounded-md text-[10px] font-bold border border-[var(--border-subtle)] bg-[var(--bg-primary)] text-[var(--text-primary)]">
+                  <span className="absolute top-4 right-4 px-3 py-1.5 rounded-full text-[10px] font-black uppercase bg-white text-[#1A1A1A] shadow-sm tracking-wider">
                     {project.difficulty}
                   </span>
                 </div>
 
                 {/* Content */}
-                <div className="p-6">
-                  <h3 className="text-lg font-bold mb-2 text-[var(--text-primary)] group-hover:text-white transition-colors line-clamp-1">
+                <div className="p-8 flex flex-col flex-1">
+                  <h3 className="text-xl font-bold mb-3 text-[#1A1A1A] group-hover:text-[#FF4B3A] transition-colors line-clamp-1 leading-tight">
                     {project.title}
                   </h3>
-                  <p className="text-[var(--text-secondary)] text-sm leading-relaxed mb-4 line-clamp-2">
+                  <p className="text-[#666666] text-[15px] leading-relaxed mb-6 line-clamp-2 font-medium">
                     {project.description}
                   </p>
 
                   {/* Tech Tags */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.technologies.map((tech) => (
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {project.technologies.slice(0, 3).map((tech) => (
                       <span
                         key={tech}
-                        className="px-2 py-1 rounded-md border border-[var(--border-subtle)] bg-[var(--bg-secondary)] text-[10px] font-medium text-[var(--text-secondary)]"
+                        className="px-3 py-1.5 rounded-lg bg-[#F5F7FA] text-[11px] font-bold text-[#575757]"
                       >
                         {tech}
                       </span>
@@ -89,19 +75,19 @@ export default function FeaturedProjects() {
                   </div>
 
                   {/* Meta */}
-                  <div className="flex items-center justify-between pt-4 border-t border-[var(--border-subtle)]">
-                    <span className="flex items-center gap-1.5 text-xs text-[var(--text-muted)]">
-                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="flex items-center justify-between pt-5 border-t border-gray-50 mt-auto">
+                    <span className="flex items-center gap-2 text-xs font-bold text-[#8C8C8C]">
+                      <svg className="w-4 h-4 text-[#FF4B3A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                       {project.duration}
                     </span>
-                    <span className="flex items-center gap-1 text-xs text-[var(--text-primary)]">
-                      <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                    <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-yellow-50">
+                      <svg className="w-3.5 h-3.5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                       </svg>
-                      {project.mentorRating}
-                    </span>
+                      <span className="text-xs font-bold text-[#1A1A1A]">{project.mentorRating} Rating</span>
+                    </div>
                   </div>
                 </div>
               </div>

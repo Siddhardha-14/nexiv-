@@ -3,61 +3,50 @@
 import Link from "next/link";
 import { projects } from "@/data/siteData";
 
-const statuses = ["All", "In Progress", "Review", "Completed"];
-const difficulties = ["All", "Beginner", "Intermediate", "Advanced"];
+const statuses = ["All Projects", "In Progress", "Review", "Completed"];
 
 export default function ProjectsPage() {
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold mb-1">Projects</h1>
-        <p className="text-[var(--text-secondary)] text-sm">
-          Build real-world engineering projects
-        </p>
+    <div className="space-y-8">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-3xl font-black tracking-tight text-[#1A1A1A]">Curriculum Projects</h1>
+          <p className="text-base font-medium text-[#8C8C8C] mt-1">
+            Practical engineering building blocks for your portfolio.
+          </p>
+        </div>
       </div>
 
-      {/* Filters */}
-      <div className="flex flex-wrap gap-3">
-        <div className="flex gap-1 p-1 rounded-lg bg-[var(--bg-surface)]/50 border border-[var(--border-subtle)]">
+      {/* Filter Segmented Control */}
+      <div className="flex flex-wrap items-center gap-3">
+        <div className="flex p-1.5 bg-gray-100 rounded-2xl inline-flex">
           {statuses.map((s) => (
             <button
               key={s}
-              className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-                s === "All"
-                  ? "bg-[var(--color-primary)] text-white"
-                  : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
+              className={`px-5 py-2 rounded-xl text-sm font-bold transition-all duration-300 ${
+                s === "All Projects"
+                  ? "bg-white text-[#1A1A1A] shadow-sm"
+                  : "text-[#575757] hover:text-[#1A1A1A]"
               }`}
             >
               {s}
             </button>
           ))}
         </div>
-        <div className="flex gap-1 p-1 rounded-lg bg-[var(--bg-surface)]/50 border border-[var(--border-subtle)]">
-          {difficulties.map((d) => (
-            <button
-              key={d}
-              className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-                d === "All"
-                  ? "bg-[var(--color-primary)] text-white"
-                  : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
-              }`}
-            >
-              {d}
-            </button>
-          ))}
-        </div>
       </div>
 
       {/* Project Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map((project) => (
           <Link
             key={project.id}
             href={`/dashboard/projects/${project.id}`}
-            className="rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-surface)]/40 overflow-hidden card-hover group"
+            className="group bg-white rounded-[32px] border border-gray-100 overflow-hidden shadow-sm hover:shadow-[0_20px_50px_rgba(255,75,58,0.12)] transition-all duration-500 flex flex-col transform hover:-translate-y-1"
           >
-            <div className="h-32 bg-gradient-to-br from-[var(--bg-card)] to-[var(--bg-primary)] flex items-center justify-center relative">
-              <span className="text-4xl group-hover:scale-110 transition-transform duration-300">
+            <div className="h-40 bg-[#FFFDFB] border-b border-gray-50 flex items-center justify-center relative overflow-hidden">
+              <div className="absolute w-32 h-32 bg-orange-100/50 blur-3xl rounded-full transform scale-0 group-hover:scale-100 transition-transform duration-700" />
+              
+              <span className="relative z-10 text-5xl group-hover:scale-110 transition-transform duration-300">
                 {project.trackId === "iot" && "🌐"}
                 {project.trackId === "python" && "🐍"}
                 {project.trackId === "embedded-systems" && "⚡"}
@@ -65,32 +54,42 @@ export default function ProjectsPage() {
                 {project.trackId === "networking" && "🔗"}
                 {project.trackId === "data-analytics" && "📊"}
               </span>
-              <span className={`absolute top-2 right-2 px-2 py-0.5 rounded-full text-[10px] font-bold ${
-                project.difficulty === "Beginner" ? "bg-[#10B981]/20 text-[#10B981]" :
-                project.difficulty === "Intermediate" ? "bg-[#F59E0B]/20 text-[#F59E0B]" :
-                "bg-[#EF4444]/20 text-[#EF4444]"
+              
+              <span className={`absolute top-4 right-4 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${
+                project.difficulty === "Beginner" ? "bg-green-50 text-green-600" :
+                project.difficulty === "Intermediate" ? "bg-yellow-50 text-yellow-600" :
+                "bg-red-50 text-red-600"
               }`}>
                 {project.difficulty}
               </span>
             </div>
-            <div className="p-4">
-              <h3 className="text-sm font-semibold mb-1 group-hover:text-white transition-colors line-clamp-1">
+            
+            <div className="p-6 flex flex-col flex-1">
+              <h3 className="text-lg font-bold text-[#1A1A1A] mb-2 group-hover:text-[#FF4B3A] transition-colors leading-snug line-clamp-1">
                 {project.title}
               </h3>
-              <p className="text-xs text-[var(--text-secondary)] mb-3 line-clamp-2">
+              <p className="text-sm font-medium text-[#666666] mb-5 line-clamp-2 leading-relaxed">
                 {project.description}
               </p>
-              <div className="flex flex-wrap gap-1 mb-3">
+              
+              <div className="flex flex-wrap gap-1.5 mb-5 mt-auto">
                 {project.technologies.slice(0, 3).map((t) => (
-                  <span key={t} className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-[var(--color-primary)]/10 text-[var(--color-primary-light)]">
+                  <span key={t} className="px-2.5 py-1 rounded-md text-[11px] font-bold bg-[#F5F7FA] text-[#575757]">
                     {t}
                   </span>
                 ))}
               </div>
-              <div className="flex items-center justify-between text-xs text-[var(--text-muted)]">
-                <span>{project.duration}</span>
-                <span className="flex items-center gap-1 text-[var(--color-warning)]">
-                  ★ {project.mentorRating}
+              
+              <div className="flex items-center justify-between pt-4 border-t border-gray-50 text-xs font-bold text-[#8C8C8C]">
+                <span className="flex items-center gap-1.5">
+                   <svg className="w-4 h-4 text-[#FF4B3A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                   </svg>
+                   {project.duration}
+                </span>
+                <span className="flex items-center gap-1 text-[#1A1A1A] bg-yellow-50 px-2 py-0.5 rounded-full">
+                  <svg className="w-3 h-3 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                  {project.mentorRating}
                 </span>
               </div>
             </div>
