@@ -21,9 +21,9 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="auth-split-container font-sans">
+    <div className="flex min-h-screen bg-white font-sans text-[#1A1A1A]">
       {/* Left Side: Illustration Area */}
-      <div className="auth-illustration-side justify-center items-center overflow-hidden">
+      <div className="hidden lg:flex flex-1 relative bg-[#FFF3E3] p-12 flex-col justify-center items-center overflow-hidden">
         {/* Top Left Logo in Illustration Side */}
         <div className="absolute top-12 left-12 flex items-center gap-2 z-10">
           <div className="w-10 h-10 bg-[#FF4B3A] rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-md">
@@ -44,7 +44,7 @@ export default function LoginPage() {
       </div>
 
       {/* Right Side: The Form Area */}
-      <div className="auth-form-side">
+      <div className="flex-1 flex flex-col justify-center items-center p-6 md:p-12 bg-white">
         <div className="w-full max-w-[420px] px-4">
           {/* Mobile Logo */}
           <div className="lg:hidden flex items-center gap-2 mb-12 justify-center">
