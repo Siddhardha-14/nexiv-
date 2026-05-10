@@ -3,6 +3,18 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { ThemeToggle } from "@/components/theme-toggle";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const navItems = [
   {
@@ -59,7 +71,7 @@ export default function DashboardLayout({
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#FFF8F2] flex text-[#1A1A1A]">
+    <div className="min-h-screen bg-background flex">
       {/* Mobile Overlay */}
       {mobileOpen && (
         <div
@@ -70,18 +82,18 @@ export default function DashboardLayout({
 
       {/* Sidebar */}
       <aside
-        className={`fixed lg:sticky top-0 left-0 h-screen z-50 flex flex-col transition-all duration-300 bg-white shadow-sm border-r border-gray-100 ${
+        className={`fixed lg:sticky top-0 left-0 h-screen z-50 flex flex-col transition-all duration-300 bg-card border-r border-border ${
           collapsed ? "w-[80px]" : "w-64"
         } ${mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}`}
       >
         {/* Logo */}
-        <div className="h-20 flex items-center px-6 border-b border-gray-50 flex-shrink-0">
+        <div className="h-20 flex items-center px-6 border-b border-border flex-shrink-0">
           <Link href="/" className="flex items-center gap-2.5 overflow-hidden">
-            <div className="w-9 h-9 rounded-xl bg-[#FF4B3A] shadow-md flex items-center justify-center font-black text-white text-lg flex-shrink-0">
+            <div className="size-9 rounded-xl bg-[#FF4B3A] shadow-lg shadow-[#FF4B3A]/30 flex items-center justify-center font-black text-white text-lg flex-shrink-0">
               N
             </div>
             {!collapsed && (
-              <span className="text-xl font-black tracking-tight whitespace-nowrap text-[#1A1A1A]">
+              <span className="text-xl font-black tracking-tight whitespace-nowrap text-foreground">
                 Nexiv
               </span>
             )}
@@ -97,18 +109,18 @@ export default function DashboardLayout({
                 key={item.href}
                 href={item.href}
                 onClick={() => setMobileOpen(false)}
-                className={`relative flex items-center gap-3 px-3 py-2.5 rounded-2xl text-[15px] font-bold transition-all duration-200 group ${
+                className={`relative flex items-center gap-3 px-3 py-2.5 rounded-xl text-[15px] font-semibold transition-all duration-200 group ${
                   isActive
-                    ? "bg-[#FFF3E3] text-[#FF4B3A]"
-                    : "text-[#575757] hover:bg-[#FFFDFB] hover:text-[#1A1A1A]"
+                    ? "bg-[#FF4B3A]/10 text-[#FF4B3A]"
+                    : "text-muted-foreground hover:bg-secondary hover:text-foreground"
                 }`}
                 title={collapsed ? item.label : undefined}
               >
                 <div className={`flex items-center justify-center flex-shrink-0 transition-colors ${
-                  isActive ? "text-[#FF4B3A]" : "text-[#A1A1A1] group-hover:text-[#FF4B3A]"
+                  isActive ? "text-[#FF4B3A]" : "text-muted-foreground group-hover:text-[#FF4B3A]"
                 }`}>
                   <svg
-                    className="w-[20px] h-[20px]"
+                    className="size-5"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -123,51 +135,73 @@ export default function DashboardLayout({
         </nav>
 
         {/* User Section */}
-        <div className="p-4 border-t border-gray-50 flex-shrink-0">
-          <div className={`flex items-center gap-3 p-2 rounded-2xl hover:bg-[#FFF3E3]/50 transition-all cursor-pointer ${collapsed ? "justify-center" : ""}`}>
-            <div className="w-9 h-9 rounded-full bg-[#FF4B3A]/10 text-[#FF4B3A] flex items-center justify-center font-black text-sm flex-shrink-0">
-              AK
-            </div>
-            {!collapsed && (
-              <div className="min-w-0 flex-1">
-                <p className="text-sm font-bold text-[#1A1A1A] truncate">Aravind K.</p>
-                <p className="text-xs font-medium text-[#8C8C8C] truncate">Student</p>
-              </div>
-            )}
-          </div>
+        <div className="p-4 border-t border-border flex-shrink-0">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button className={`w-full flex items-center gap-3 p-2 rounded-xl hover:bg-secondary transition-all cursor-pointer ${collapsed ? "justify-center" : ""}`}>
+                <Avatar className="size-9">
+                  <AvatarFallback className="bg-[#FF4B3A]/10 text-[#FF4B3A] font-bold text-sm">
+                    AK
+                  </AvatarFallback>
+                </Avatar>
+                {!collapsed && (
+                  <div className="min-w-0 flex-1 text-left">
+                    <p className="text-sm font-bold text-foreground truncate">Aravind K.</p>
+                    <p className="text-xs font-medium text-muted-foreground truncate">Student</p>
+                  </div>
+                )}
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-56">
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <DropdownMenuItem>
+                  <Link href="/dashboard/settings" className="w-full">Settings</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/dashboard/portfolio" className="w-full">Portfolio</Link>
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem className="text-destructive">
+                <Link href="/auth/login" className="w-full">Log out</Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </aside>
 
       {/* Main Content Shell */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Top Header */}
-        <header className="h-20 bg-white/80 backdrop-blur-md border-b border-gray-50 flex items-center px-6 justify-between sticky top-0 z-30">
+        <header className="h-20 bg-card/80 backdrop-blur-md border-b border-border flex items-center px-6 justify-between sticky top-0 z-30">
           <div className="flex items-center gap-4 flex-1">
             {/* Mobile Toggle */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden text-[#575757]"
+              className="lg:hidden text-muted-foreground hover:text-foreground"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="size-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
 
             {/* Collapse Toggle Desktop */}
-            <button onClick={() => setCollapsed(!collapsed)} className="hidden lg:flex text-[#A1A1A1] hover:text-[#FF4B3A] transition-colors">
-               <svg className={`w-5 h-5 transform ${collapsed ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/></svg>
+            <button onClick={() => setCollapsed(!collapsed)} className="hidden lg:flex text-muted-foreground hover:text-[#FF4B3A] transition-colors">
+               <svg className={`size-5 transform ${collapsed ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/></svg>
             </button>
 
             {/* Search */}
             <div className="hidden sm:block w-full max-w-sm ml-2">
               <div className="relative">
-                <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A1A1A1]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="w-full pl-10 pr-4 py-2.5 bg-[#F8F9FB] border border-transparent rounded-full text-sm text-[#1A1A1A] placeholder:text-[#A1A1A1] focus:outline-none focus:border-[#FF4B3A] focus:bg-white transition-all"
+                  className="w-full pl-10 pr-4 py-2.5 bg-secondary/50 border border-border/50 rounded-full text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-[#FF4B3A] focus:bg-background transition-all"
                 />
               </div>
             </div>
@@ -175,23 +209,28 @@ export default function DashboardLayout({
 
           {/* Right Utilities */}
           <div className="flex items-center gap-3">
+            {/* Theme Toggle */}
+            <ThemeToggle />
+            
             {/* Notifications */}
-            <button className="relative w-10 h-10 rounded-full bg-[#F8F9FB] hover:bg-[#FFF3E3] text-[#575757] hover:text-[#FF4B3A] flex items-center justify-center transition-all">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button className="relative size-10 rounded-full bg-secondary/50 hover:bg-[#FF4B3A]/10 text-muted-foreground hover:text-[#FF4B3A] flex items-center justify-center transition-all">
+              <svg className="size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
               </svg>
-              <span className="absolute top-0 right-0 w-4 h-4 rounded-full bg-[#FF4B3A] text-white text-[10px] font-black flex items-center justify-center border-2 border-white">3</span>
+              <span className="absolute top-0 right-0 size-4 rounded-full bg-[#FF4B3A] text-white text-[10px] font-black flex items-center justify-center border-2 border-card">3</span>
             </button>
             
             {/* Quick Action */}
-            <Link href="/dashboard/projects" className="hidden md:flex items-center gap-2 px-4 py-2.5 bg-[#1A1A1A] text-white text-sm font-bold rounded-full hover:bg-[#333] transition-all shadow-sm">
-               <span>New Project</span>
+            <Link href="/dashboard/projects">
+              <Button className="hidden md:flex bg-foreground text-background hover:bg-foreground/90 font-bold rounded-full">
+                New Project
+              </Button>
             </Link>
           </div>
         </header>
 
         {/* Page Content */}
-        <main className="flex-1 p-6 md:p-8 overflow-y-auto bg-[#FFF8F2]">
+        <main className="flex-1 p-6 md:p-8 overflow-y-auto">
           <div className="max-w-7xl mx-auto w-full">
             {children}
           </div>
