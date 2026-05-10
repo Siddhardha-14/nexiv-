@@ -24,18 +24,5 @@ Nexiv offers comprehensive skill tracks ranging from Beginner to Advanced levels
 - **Admin Command Center:** High-fidelity management system to oversee users, projects, and tracks.
 - **Premium Aesthetics:** A clean, high-contrast, and professional SaaS UI designed to provide a cohesive experience across all devices.
 
-## Getting Started
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the platform.
