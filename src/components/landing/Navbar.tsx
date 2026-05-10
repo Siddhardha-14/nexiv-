@@ -26,14 +26,14 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-background/90 backdrop-blur-md border-b border-border shadow-sm"
+          ? "bg-background/95 backdrop-blur-md border-b border-border shadow-sm"
           : "bg-transparent border-b border-transparent"
       }`}
     >
       <div className="section-container flex items-center justify-between h-[80px]">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="size-9 rounded-xl bg-[#FF4B3A] shadow-md shadow-[#FF4B3A]/20 flex items-center justify-center font-extrabold text-white text-lg transition-transform group-hover:scale-105">
+          <div className="size-9 rounded-xl bg-gradient-to-br from-[#2563EB] to-[#0D9488] shadow-md shadow-[#2563EB]/20 flex items-center justify-center font-bold text-white text-lg transition-transform group-hover:scale-105">
             N
           </div>
           <span className="text-xl font-bold text-foreground tracking-tight">
@@ -47,7 +47,7 @@ export default function Navbar() {
             <a
               key={link.label}
               href={link.href}
-              className="text-muted-foreground hover:text-[#FF4B3A] transition-colors duration-200 text-[15px] font-medium"
+              className="text-muted-foreground hover:text-[#2563EB] transition-colors duration-200 text-[15px] font-medium"
             >
               {link.label}
             </a>
@@ -58,12 +58,12 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-3">
           <ThemeToggle />
           <Link href="/auth/login">
-            <Button variant="ghost" className="text-muted-foreground hover:text-foreground font-semibold">
+            <Button variant="ghost" className="text-muted-foreground hover:text-foreground font-medium">
               Log in
             </Button>
           </Link>
           <Link href="/auth/signup">
-            <Button className="bg-[#FF4B3A] hover:bg-[#E33A2B] text-white font-semibold rounded-full px-6 shadow-lg shadow-[#FF4B3A]/20">
+            <Button className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-medium rounded-full px-6 shadow-md shadow-[#2563EB]/20">
               Get Started
             </Button>
           </Link>
@@ -108,7 +108,7 @@ export default function Navbar() {
               key={link.label}
               href={link.href}
               onClick={() => setMobileOpen(false)}
-              className="text-muted-foreground hover:text-[#FF4B3A] font-medium transition-colors py-2 border-b border-border/50"
+              className="text-muted-foreground hover:text-[#2563EB] font-medium transition-colors py-2 border-b border-border/50"
             >
               {link.label}
             </a>
@@ -120,7 +120,7 @@ export default function Navbar() {
               </Button>
             </Link>
             <Link href="/auth/signup" onClick={() => setMobileOpen(false)}>
-              <Button className="w-full bg-[#FF4B3A] hover:bg-[#E33A2B] text-white">
+              <Button className="w-full bg-[#2563EB] hover:bg-[#1D4ED8] text-white">
                 Get Started
               </Button>
             </Link>

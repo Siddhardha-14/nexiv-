@@ -35,14 +35,14 @@ export default function LoginPage() {
   return (
     <div className="flex min-h-screen bg-background font-sans">
       {/* Left Side: Illustration Area */}
-      <div className="hidden lg:flex flex-1 relative bg-[#FF4B3A]/5 dark:bg-[#FF4B3A]/10 p-12 flex-col justify-center items-center overflow-hidden">
+      <div className="hidden lg:flex flex-1 relative bg-[#2563EB]/5 dark:bg-[#2563EB]/10 p-12 flex-col justify-center items-center overflow-hidden">
         {/* Decorative gradient blob */}
-        <div className="absolute top-[-10%] right-[-10%] size-[500px] bg-[#FF4B3A]/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-[-10%] left-[-10%] size-[400px] bg-[#FF4B3A]/10 rounded-full blur-3xl" />
+        <div className="absolute top-[-10%] right-[-10%] size-[500px] bg-[#2563EB]/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-[-10%] left-[-10%] size-[400px] bg-[#2563EB]/10 rounded-full blur-3xl" />
         
         {/* Top Left Logo */}
         <div className="absolute top-12 left-12 flex items-center gap-2.5 z-10">
-          <div className="size-10 bg-[#FF4B3A] rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-[#FF4B3A]/30">
+          <div className="size-10 bg-[#2563EB] rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-[#2563EB]/30">
             N
           </div>
           <span className="text-2xl font-bold text-foreground tracking-tight">Nexiv</span>
@@ -82,7 +82,7 @@ export default function LoginPage() {
           <CardHeader className="px-0">
             {/* Mobile Logo */}
             <div className="lg:hidden flex items-center gap-2 mb-6 justify-center">
-              <div className="size-9 bg-[#FF4B3A] rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-[#FF4B3A]/30">
+              <div className="size-9 bg-[#2563EB] rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-[#2563EB]/30">
                 N
               </div>
               <span className="text-xl font-bold text-foreground">Nexiv</span>
@@ -91,7 +91,7 @@ export default function LoginPage() {
             <CardTitle className="text-3xl font-bold tracking-tight">Sign in</CardTitle>
             <CardDescription className="text-muted-foreground mt-2">
               {"If you don't have an account, "}
-              <Link href="/auth/signup" className="text-[#FF4B3A] font-semibold hover:underline">
+              <Link href="/auth/signup" className="text-[#2563EB] font-semibold hover:underline">
                 Register here
               </Link>
             </CardDescription>
@@ -180,7 +180,7 @@ export default function LoginPage() {
 
               <div className="flex items-center justify-between text-sm">
                 <label className="flex items-center gap-2 cursor-pointer">
-                  <input type="checkbox" className="size-4 rounded border-border text-[#FF4B3A] focus:ring-[#FF4B3A]" />
+                  <input type="checkbox" className="size-4 rounded border-border text-[#2563EB] focus:ring-[#2563EB]" />
                   <span className="text-muted-foreground">Remember me</span>
                 </label>
                 <Link href="/auth/forgot-password" className="text-muted-foreground hover:text-foreground transition-colors">
@@ -191,7 +191,7 @@ export default function LoginPage() {
               <Button
                 type="submit"
                 disabled={isLoading}
-                className="w-full h-12 bg-[#FF4B3A] hover:bg-[#E33A2B] text-white font-bold rounded-xl shadow-lg shadow-[#FF4B3A]/30"
+                className="w-full h-12 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-bold rounded-xl shadow-lg shadow-[#2563EB]/30"
               >
                 {isLoading ? (
                   <span className="flex items-center gap-2">

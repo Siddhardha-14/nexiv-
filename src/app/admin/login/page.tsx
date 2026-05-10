@@ -44,22 +44,22 @@ export default function AdminLoginPage() {
       {/* Left Panel - Branding */}
       <div className="hidden lg:flex lg:w-1/2 relative flex-col justify-between p-16 overflow-hidden border-r border-border bg-card">
         {/* Subtle Geometric Design */}
-        <div className="absolute top-[-20%] right-[-20%] size-[600px] bg-[#FF4B3A]/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-[-10%] left-[-10%] size-[400px] bg-[#FF4B3A]/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-[-20%] right-[-20%] size-[600px] bg-[#2563EB]/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-[-10%] left-[-10%] size-[400px] bg-[#2563EB]/10 rounded-full blur-3xl pointer-events-none" />
         
         {/* Content */}
         <div className="relative z-10 flex flex-col h-full">
           {/* Logo & Theme Toggle */}
           <div className="flex items-center justify-between">
             <Link href="/" className="flex items-center gap-3 w-fit group">
-              <div className="size-12 rounded-2xl bg-[#FF4B3A] flex items-center justify-center font-bold text-white text-2xl shadow-lg shadow-[#FF4B3A]/30 transition-transform group-hover:scale-105 duration-300">
+              <div className="size-12 rounded-2xl bg-[#2563EB] flex items-center justify-center font-bold text-white text-2xl shadow-lg shadow-[#2563EB]/30 transition-transform group-hover:scale-105 duration-300">
                 N
               </div>
               <div className="flex flex-col">
                 <span className="text-2xl font-bold tracking-tight text-foreground leading-none">
                   Nexiv
                 </span>
-                <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#FF4B3A] leading-none mt-1.5">
+                <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#2563EB] leading-none mt-1.5">
                   Administration
                 </span>
               </div>
@@ -69,13 +69,13 @@ export default function AdminLoginPage() {
 
           {/* Hero Copy */}
           <div className="mt-auto mb-24">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#FF4B3A]/10 text-[#FF4B3A] text-xs font-bold uppercase tracking-wider mb-6">
-              <span className="size-2 bg-[#FF4B3A] rounded-full animate-pulse"/>
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#2563EB]/10 text-[#2563EB] text-xs font-bold uppercase tracking-wider mb-6">
+              <span className="size-2 bg-[#2563EB] rounded-full animate-pulse"/>
               Secure Gateway
             </div>
             <h1 className="text-5xl font-bold mb-6 tracking-tight leading-[1.1] text-foreground">
               Control the <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF4B3A] to-[#FF8A65]">Ecosystem.</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2563EB] to-[#0D9488]">Ecosystem.</span>
             </h1>
             <p className="text-lg text-muted-foreground max-w-md leading-relaxed">
               Enter the Command Center to oversee mentorship workflows, review project submittals, and drive institutional performance.
@@ -102,12 +102,12 @@ export default function AdminLoginPage() {
             {/* Mobile Logo */}
             <div className="lg:hidden flex justify-center mb-6">
               <Link href="/" className="flex items-center gap-3">
-                <div className="size-11 rounded-xl bg-[#FF4B3A] flex items-center justify-center font-bold text-white text-xl shadow-lg shadow-[#FF4B3A]/30">
+                <div className="size-11 rounded-xl bg-[#2563EB] flex items-center justify-center font-bold text-white text-xl shadow-lg shadow-[#2563EB]/30">
                   N
                 </div>
                 <div className="flex flex-col items-start">
                   <span className="text-2xl font-bold tracking-tight text-foreground leading-none">Nexiv</span>
-                  <span className="text-[10px] font-bold tracking-wider uppercase text-[#FF4B3A] mt-1">Admin</span>
+                  <span className="text-[10px] font-bold tracking-wider uppercase text-[#2563EB] mt-1">Admin</span>
                 </div>
               </Link>
             </div>
@@ -225,7 +225,7 @@ export default function AdminLoginPage() {
             <div className="mt-6 text-center border-t border-border pt-6">
               <Link
                 href="/auth/login"
-                className="inline-flex items-center justify-center gap-2 text-sm text-muted-foreground hover:text-[#FF4B3A] transition-colors font-semibold"
+                className="inline-flex items-center justify-center gap-2 text-sm text-muted-foreground hover:text-[#2563EB] transition-colors font-semibold"
               >
                 <svg className="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />

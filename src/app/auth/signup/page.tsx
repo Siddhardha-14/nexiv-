@@ -38,14 +38,14 @@ export default function SignupPage() {
   return (
     <div className="flex min-h-screen bg-background font-sans">
       {/* Left Side: Illustration Area */}
-      <div className="hidden lg:flex flex-1 relative bg-[#FF4B3A]/5 dark:bg-[#FF4B3A]/10 p-12 flex-col justify-center items-center overflow-hidden">
+      <div className="hidden lg:flex flex-1 relative bg-[#2563EB]/5 dark:bg-[#2563EB]/10 p-12 flex-col justify-center items-center overflow-hidden">
         {/* Decorative gradient blob */}
-        <div className="absolute top-[-10%] right-[-10%] size-[500px] bg-[#FF4B3A]/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-[-10%] left-[-10%] size-[400px] bg-[#FF4B3A]/10 rounded-full blur-3xl" />
+        <div className="absolute top-[-10%] right-[-10%] size-[500px] bg-[#2563EB]/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-[-10%] left-[-10%] size-[400px] bg-[#2563EB]/10 rounded-full blur-3xl" />
         
         {/* Top Left Logo */}
         <div className="absolute top-12 left-12 flex items-center gap-2.5 z-10">
-          <div className="size-10 bg-[#FF4B3A] rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-[#FF4B3A]/30">
+          <div className="size-10 bg-[#2563EB] rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-[#2563EB]/30">
             N
           </div>
           <span className="text-2xl font-bold text-foreground tracking-tight">Nexiv</span>
@@ -85,7 +85,7 @@ export default function SignupPage() {
           <CardHeader className="px-0">
             {/* Mobile Logo */}
             <div className="lg:hidden flex items-center gap-2 mb-6 justify-center">
-              <div className="size-9 bg-[#FF4B3A] rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-[#FF4B3A]/30">
+              <div className="size-9 bg-[#2563EB] rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-[#2563EB]/30">
                 N
               </div>
               <span className="text-xl font-bold text-foreground">Nexiv</span>
@@ -94,7 +94,7 @@ export default function SignupPage() {
             <CardTitle className="text-3xl font-bold tracking-tight">Sign up</CardTitle>
             <CardDescription className="text-muted-foreground mt-2">
               {"Already have an account? "}
-              <Link href="/auth/login" className="text-[#FF4B3A] font-semibold hover:underline">
+              <Link href="/auth/login" className="text-[#2563EB] font-semibold hover:underline">
                 Login here
               </Link>
             </CardDescription>
@@ -108,7 +108,7 @@ export default function SignupPage() {
                 onClick={() => setRole("student")}
                 className={`px-5 py-2 rounded-full text-sm font-semibold transition-all ${
                   role === "student" 
-                    ? "bg-card text-[#FF4B3A] shadow-sm" 
+                    ? "bg-card text-[#2563EB] shadow-sm" 
                     : "text-muted-foreground hover:text-foreground"
                 }`}
               >
@@ -119,7 +119,7 @@ export default function SignupPage() {
                 onClick={() => setRole("mentor")}
                 className={`px-5 py-2 rounded-full text-sm font-semibold transition-all ${
                   role === "mentor" 
-                    ? "bg-card text-[#FF4B3A] shadow-sm" 
+                    ? "bg-card text-[#2563EB] shadow-sm" 
                     : "text-muted-foreground hover:text-foreground"
                 }`}
               >
@@ -241,7 +241,7 @@ export default function SignupPage() {
               <Button
                 type="submit"
                 disabled={isLoading}
-                className="w-full h-12 bg-[#FF4B3A] hover:bg-[#E33A2B] text-white font-bold rounded-xl shadow-lg shadow-[#FF4B3A]/30 mt-4"
+                className="w-full h-12 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-bold rounded-xl shadow-lg shadow-[#2563EB]/30 mt-4"
               >
                 {isLoading ? (
                   <span className="flex items-center gap-2">

@@ -28,7 +28,7 @@ export default function DashboardPage() {
     <div className="space-y-8">
       {/* Welcome Banner */}
       <Card className="relative overflow-hidden border-border/50">
-        <div className="absolute top-0 right-0 w-64 h-full bg-gradient-to-l from-[#FF4B3A]/10 to-transparent z-0" />
+        <div className="absolute top-0 right-0 w-64 h-full bg-gradient-to-l from-[#2563EB]/10 to-transparent z-0" />
         
         <CardContent className="p-8 md:p-10 relative z-10">
           <Badge variant="secondary" className="bg-green-500/10 text-green-600 dark:text-green-400 border-0 mb-4">
@@ -36,14 +36,14 @@ export default function DashboardPage() {
             Active Session
           </Badge>
           <h1 className="text-3xl md:text-4xl font-black mb-3 tracking-tight text-foreground">
-            Welcome back, <span className="text-[#FF4B3A]">Aravind</span>
+            Welcome back, <span className="text-[#2563EB]">Aravind</span>
           </h1>
           <p className="text-muted-foreground text-base md:text-lg max-w-lg font-medium leading-relaxed">
             You have <span className="font-bold text-foreground">3 active projects</span> and 2 pending reviews. Keep building — your portfolio is growing!
           </p>
           <div className="flex flex-wrap gap-3 mt-8">
             <Link href="/dashboard/projects">
-              <Button className="bg-[#FF4B3A] hover:bg-[#E33A2B] text-white font-bold shadow-lg shadow-[#FF4B3A]/20">
+              <Button className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-bold shadow-lg shadow-[#2563EB]/20">
                 Continue Project
                 <svg className="size-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -62,12 +62,12 @@ export default function DashboardPage() {
       {/* Stats Row */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {[
-          { label: "Projects Completed", value: "8", icon: "check", change: "+2 this month", color: "#FF4B3A" },
+          { label: "Projects Completed", value: "8", icon: "check", change: "+2 this month", color: "#2563EB" },
           { label: "Active Tracks", value: "3", icon: "book", change: "2 in progress", color: "#3B82F6" },
           { label: "Certificates", value: "5", icon: "award", change: "1 pending", color: "#F59E0B" },
           { label: "Portfolio Score", value: "87%", icon: "star", change: "+5% this week", color: "#10B981" },
         ].map((stat, i) => (
-          <Card key={i} className="border-border/50 hover:shadow-lg hover:shadow-[#FF4B3A]/5 transition-all duration-300">
+          <Card key={i} className="border-border/50 hover:shadow-lg hover:shadow-[#2563EB]/5 transition-all duration-300">
             <CardContent className="p-6">
               <div className="flex items-center justify-between mb-4">
                 <div 
@@ -112,7 +112,7 @@ export default function DashboardPage() {
           <Card className="border-border/50">
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle className="text-xl font-black tracking-tight">Active Projects</CardTitle>
-              <Link href="/dashboard/projects" className="text-sm font-bold text-[#FF4B3A] hover:underline flex items-center gap-1">
+              <Link href="/dashboard/projects" className="text-sm font-bold text-[#2563EB] hover:underline flex items-center gap-1">
                 View All
                 <svg className="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
@@ -124,11 +124,11 @@ export default function DashboardPage() {
                 <Link
                   key={project.id}
                   href={`/dashboard/projects/${project.id}`}
-                  className="block rounded-xl border border-border/50 bg-secondary/30 p-6 hover:bg-secondary/50 hover:shadow-lg hover:shadow-[#FF4B3A]/5 transition-all duration-300 group"
+                  className="block rounded-xl border border-border/50 bg-secondary/30 p-6 hover:bg-secondary/50 hover:shadow-lg hover:shadow-[#2563EB]/5 transition-all duration-300 group"
                 >
                   <div className="flex items-start justify-between mb-4">
                     <div>
-                      <h3 className="text-lg font-bold text-foreground group-hover:text-[#FF4B3A] transition-colors mb-1">
+                      <h3 className="text-lg font-bold text-foreground group-hover:text-[#2563EB] transition-colors mb-1">
                         {project.title}
                       </h3>
                       <span className="text-xs font-black text-muted-foreground uppercase tracking-wider">{project.track} Track</span>
@@ -138,7 +138,7 @@ export default function DashboardPage() {
                       className={
                         project.status === "Review" 
                           ? "bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 border-0"
-                          : "bg-[#FF4B3A]/10 text-[#FF4B3A] border-0"
+                          : "bg-[#2563EB]/10 text-[#2563EB] border-0"
                       }
                     >
                       {project.status}
@@ -149,7 +149,7 @@ export default function DashboardPage() {
                   <div className="flex items-center gap-4 mb-3">
                     <div className="flex-1 h-2.5 rounded-full bg-secondary overflow-hidden">
                       <div
-                        className="h-full bg-[#FF4B3A] rounded-full transition-all duration-500"
+                        className="h-full bg-[#2563EB] rounded-full transition-all duration-500"
                         style={{ width: `${project.progress}%` }}
                       />
                     </div>
@@ -159,7 +159,7 @@ export default function DashboardPage() {
                   </div>
                   
                   <div className="flex items-center gap-1.5 text-xs font-bold text-muted-foreground">
-                    <svg className="size-4 text-[#FF4B3A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="size-4 text-[#2563EB]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
                     Due: {project.deadline}
@@ -208,7 +208,7 @@ export default function DashboardPage() {
                   <div className={`size-2 rounded-full mt-2 flex-shrink-0 ${
                     notif.type === "success" ? "bg-green-500" :
                     notif.type === "team" ? "bg-purple-500" :
-                    "bg-[#FF4B3A]"
+                    "bg-[#2563EB]"
                   }`} />
                   <div className="flex-1 min-w-0">
                     <p className="text-[14px] font-bold text-foreground leading-tight mb-1">{notif.text}</p>

@@ -89,7 +89,7 @@ export default function DashboardLayout({
         {/* Logo */}
         <div className="h-20 flex items-center px-6 border-b border-border flex-shrink-0">
           <Link href="/" className="flex items-center gap-2.5 overflow-hidden">
-            <div className="size-9 rounded-xl bg-[#FF4B3A] shadow-lg shadow-[#FF4B3A]/30 flex items-center justify-center font-black text-white text-lg flex-shrink-0">
+            <div className="size-9 rounded-xl bg-[#2563EB] shadow-lg shadow-[#2563EB]/30 flex items-center justify-center font-black text-white text-lg flex-shrink-0">
               N
             </div>
             {!collapsed && (
@@ -111,13 +111,13 @@ export default function DashboardLayout({
                 onClick={() => setMobileOpen(false)}
                 className={`relative flex items-center gap-3 px-3 py-2.5 rounded-xl text-[15px] font-semibold transition-all duration-200 group ${
                   isActive
-                    ? "bg-[#FF4B3A]/10 text-[#FF4B3A]"
+                    ? "bg-[#2563EB]/10 text-[#2563EB]"
                     : "text-muted-foreground hover:bg-secondary hover:text-foreground"
                 }`}
                 title={collapsed ? item.label : undefined}
               >
                 <div className={`flex items-center justify-center flex-shrink-0 transition-colors ${
-                  isActive ? "text-[#FF4B3A]" : "text-muted-foreground group-hover:text-[#FF4B3A]"
+                  isActive ? "text-[#2563EB]" : "text-muted-foreground group-hover:text-[#2563EB]"
                 }`}>
                   <svg
                     className="size-5"
@@ -140,7 +140,7 @@ export default function DashboardLayout({
             <DropdownMenuTrigger asChild>
               <button className={`w-full flex items-center gap-3 p-2 rounded-xl hover:bg-secondary transition-all cursor-pointer ${collapsed ? "justify-center" : ""}`}>
                 <Avatar className="size-9">
-                  <AvatarFallback className="bg-[#FF4B3A]/10 text-[#FF4B3A] font-bold text-sm">
+                  <AvatarFallback className="bg-[#2563EB]/10 text-[#2563EB] font-bold text-sm">
                     AK
                   </AvatarFallback>
                 </Avatar>
@@ -188,7 +188,7 @@ export default function DashboardLayout({
             </button>
 
             {/* Collapse Toggle Desktop */}
-            <button onClick={() => setCollapsed(!collapsed)} className="hidden lg:flex text-muted-foreground hover:text-[#FF4B3A] transition-colors">
+            <button onClick={() => setCollapsed(!collapsed)} className="hidden lg:flex text-muted-foreground hover:text-[#2563EB] transition-colors">
                <svg className={`size-5 transform ${collapsed ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/></svg>
             </button>
 
@@ -201,7 +201,7 @@ export default function DashboardLayout({
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="w-full pl-10 pr-4 py-2.5 bg-secondary/50 border border-border/50 rounded-full text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-[#FF4B3A] focus:bg-background transition-all"
+                  className="w-full pl-10 pr-4 py-2.5 bg-secondary/50 border border-border/50 rounded-full text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-[#2563EB] focus:bg-background transition-all"
                 />
               </div>
             </div>
@@ -213,11 +213,11 @@ export default function DashboardLayout({
             <ThemeToggle />
             
             {/* Notifications */}
-            <button className="relative size-10 rounded-full bg-secondary/50 hover:bg-[#FF4B3A]/10 text-muted-foreground hover:text-[#FF4B3A] flex items-center justify-center transition-all">
+            <button className="relative size-10 rounded-full bg-secondary/50 hover:bg-[#2563EB]/10 text-muted-foreground hover:text-[#2563EB] flex items-center justify-center transition-all">
               <svg className="size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
               </svg>
-              <span className="absolute top-0 right-0 size-4 rounded-full bg-[#FF4B3A] text-white text-[10px] font-black flex items-center justify-center border-2 border-card">3</span>
+              <span className="absolute top-0 right-0 size-4 rounded-full bg-[#2563EB] text-white text-[10px] font-black flex items-center justify-center border-2 border-card">3</span>
             </button>
             
             {/* Quick Action */}

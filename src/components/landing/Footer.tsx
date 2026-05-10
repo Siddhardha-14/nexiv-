@@ -69,7 +69,7 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="flex items-center gap-2.5 mb-5">
-              <div className="size-9 rounded-xl bg-[#FF4B3A] shadow-lg shadow-[#FF4B3A]/20 flex items-center justify-center font-bold text-white text-sm">
+              <div className="size-9 rounded-xl bg-gradient-to-br from-[#2563EB] to-[#0D9488] shadow-lg shadow-[#2563EB]/20 flex items-center justify-center font-bold text-white text-sm">
                 N
               </div>
               <span className="text-lg font-bold tracking-tight text-foreground">
