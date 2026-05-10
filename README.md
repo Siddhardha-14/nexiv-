@@ -1,4 +1,28 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nexiv 🚀
+
+Nexiv is a modern, project-first, and portfolio-first engineering learning platform. It is designed to bridge the gap between theoretical knowledge and industry requirements by moving away from passive video consumption and focusing on building real-world engineering projects with mentor guidance.
+
+## What makes Nexiv different?
+- **Project-First Approach:** Build real engineering projects instead of just watching tutorials.
+- **Mentor Guidance:** Get your code, designs, and implementations reviewed by industry mentors who provide actionable feedback.
+- **Auto-Generated Portfolios:** Every completed and approved project is automatically added to your professional Nexiv portfolio, making you job-ready from day one.
+- **Team Collaboration:** Mirror real engineering workflows by collaborating with other students on team projects.
+- **Industry Certificates:** Earn verifiable certificates reflecting actual project completion and mentor approval.
+
+## Skill Tracks
+Nexiv offers comprehensive skill tracks ranging from Beginner to Advanced levels:
+- ⚡ **Embedded Systems:** Master microcontrollers, RTOS, and hardware-software integration.
+- 🎨 **UI/UX Design:** Learn user-centered design and build stunning interfaces.
+- 🌐 **Internet of Things (IoT):** Build connected devices, sensor networks, and smart systems.
+- 🐍 **Python Engineering:** Build automation tools, data pipelines, APIs, and ML models.
+- 🔗 **Network Engineering:** Configure enterprise networks and implement security protocols.
+- 📊 **Data Analytics:** Transform raw data into actionable insights using SQL, Python, and visualization tools.
+
+## Platform Features
+- **Student Dashboard:** Track your progress, manage projects, and view mentor feedback.
+- **Mentor Review System:** A dedicated workflow for mentors to review and approve student projects.
+- **Admin Command Center:** High-fidelity management system to oversee users, projects, and tracks.
+- **Premium Aesthetics:** A clean, high-contrast, and professional SaaS UI designed to provide a cohesive experience across all devices.
 
 ## Getting Started
 
@@ -14,23 +38,4 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the platform.
