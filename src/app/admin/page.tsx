@@ -1,9 +1,20 @@
 "use client";
 
+import { useState } from "react";
+
 const chartBars = [35, 48, 62, 55, 78, 85, 72, 90, 68, 95, 88, 100];
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 export default function AdminDashboardPage() {
+  const [isDownloading, setIsDownloading] = useState(false);
+  
+  const handleDownloadAudit = async () => {
+    setIsDownloading(true);
+    // Simulate report generation delay
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    setIsDownloading(false);
+    // Trigger an alert or toast would go here
+  };
   return (
     <div className="space-y-8">
       {/* Header */}
@@ -13,11 +24,22 @@ export default function AdminDashboardPage() {
           <p className="text-base font-medium text-[#8C8C8C] mt-1">Real-time telemetry and platform health monitoring.</p>
         </div>
         <div className="flex items-center gap-3">
-          <button className="px-5 py-2.5 border border-gray-200 rounded-full bg-white text-[#1A1A1A] text-sm font-bold flex items-center gap-2 shadow-sm hover:bg-gray-50 transition-all">
-            <svg className="w-4 h-4 text-[#A1A1A1]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
-            </svg>
-            Download Audit
+          <button
+            onClick={handleDownloadAudit}
+            disabled={isDownloading}
+            className="btn-primary disabled:opacity-70 disabled:cursor-wait"
+          >
+            {isDownloading ? (
+              <svg className="w-4 h-4 text-[#FF4B3A] animate-spin" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+              </svg>
+            ) : (
+              <svg className="w-4 h-4 text-[#A1A1A1]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+              </svg>
+            )}
+            {isDownloading ? "Generating..." : "Download Audit"}
           </button>
         </div>
       </div>
@@ -30,7 +52,7 @@ export default function AdminDashboardPage() {
           { label: "Revenue (MTD)", value: "₹4.2L", change: "+23%", color: "#10B981", icon: "💰" },
           { label: "Certifications", value: "156", change: "+15%", color: "#F59E0B", icon: "🏆" },
         ].map((stat, i) => (
-          <div key={i} className="bg-white border border-gray-100 rounded-[24px] p-6 shadow-sm hover:shadow-md transition-all">
+          <div key={i} className="card p-6">
             <div className="flex items-center justify-between mb-4">
               <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl" style={{ backgroundColor: `${stat.color}10` }}>
                 {stat.icon}

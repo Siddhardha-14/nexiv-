@@ -20,7 +20,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }
 
   return (
-    <div className="min-h-screen bg-[#FFF8F2] flex text-[#1A1A1A]">
+    <div className="min-h-screen bg-[var(--color-bg-dashboard)] flex text-[#1A1A1A]">
       {mobileOpen && <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 lg:hidden" onClick={() => setMobileOpen(false)} />}
 
       <aside

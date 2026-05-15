@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "@fontsource/mona-sans/index.css";
 import "./globals.css";
+import "./ui.css";
+import { AuthProvider } from "@/context/AuthContext";
 
 export const metadata: Metadata = {
   title: "Nexiv — Engineering Skill-to-Job Platform",
@@ -34,7 +36,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full antialiased" suppressHydrationWarning>
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+      <body className="min-h-full flex flex-col font-sans" suppressHydrationWarning>
+        <AuthProvider>
+          {children}
+        </AuthProvider>
+      </body>
     </html>
   );
 }
+

@@ -1,0 +1,64 @@
+/* src/app/ui.css */
+:root {
+  /* Primary colors */
+  --color-primary: #1A1A1A; /* primary text */
+  --color-accent: #FF4B3A; /* critical actions */
+  --color-bg-light: #FFFDFB; /* light sections */
+  --color-bg-dashboard: #FFF8F2; /* dashboard background */
+  --color-muted: #575757; /* secondary text */
+  --color-white: #ffffff;
+  --radius: 32px;
+  --shadow-soft: 0 10px 40px -15px rgba(0,0,0,0.03);
+  --shadow-hover: 0 15px 30px -10px rgba(0,0,0,0.05);
+  --font-base: 'Inter', sans-serif;
+}
+
+/* Global resets */
+html, body {
+  font-family: var(--font-base);
+  color: var(--color-primary);
+}
+
+/* Utility classes */
+.card {
+  border-radius: var(--radius);
+  background: var(--color-white);
+  box-shadow: var(--shadow-soft);
+  border: 1px solid #f0f0f0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.btn-primary {
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  border-radius: var(--radius);
+  padding: 0.5rem 1.25rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+.btn-primary:hover {
+  background-color: #FF6252; /* lighter accent */
+}
+
+.btn-secondary {
+  background-color: var(--color-white);
+  color: var(--color-primary);
+  border: 1px solid #e5e7eb;
+  border-radius: var(--radius);
+  padding: 0.5rem 1.25rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+.btn-secondary:hover {
+  background-color: #f5f5f5;
+}

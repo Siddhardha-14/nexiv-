@@ -3,7 +3,6 @@ import Hero from "@/components/landing/Hero";
 import SkillTracks from "@/components/landing/SkillTracks";
 import FeaturedProjects from "@/components/landing/FeaturedProjects";
 import SuccessShowcase from "@/components/landing/SuccessShowcase";
-import Pricing from "@/components/landing/Pricing";
 import FAQ from "@/components/landing/FAQ";
 import Footer from "@/components/landing/Footer";
 
@@ -15,7 +14,6 @@ export default function Home() {
       <SkillTracks />
       <FeaturedProjects />
       <SuccessShowcase />
-      <Pricing />
       <FAQ />
       <Footer />
     </main>

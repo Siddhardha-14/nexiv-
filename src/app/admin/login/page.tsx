@@ -1,8 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+import { auth, db } from "@/lib/firebase";
+import { useAuth } from "@/context/AuthContext";
+import FormInput from "@/components/ui/FormInput";
+import InlineError, { InlineWarning } from "@/components/ui/InlineError";
+import {
+  useFormValidation,
+  validateEmail,
+  EmailValidationResult,
+} from "@/hooks/useFormValidation";
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -11,21 +22,127 @@ export default function AdminLoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [failedAttempts, setFailedAttempts] = useState(0);
+  const [lockoutTimer, setLockoutTimer] = useState(0);
+  const [emailSuggestion, setEmailSuggestion] = useState<string | null>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const { refreshProfile } = useAuth();
+
+  const { validateFieldImmediate, getFieldState } = useFormValidation();
+  const emailState = getFieldState("email");
+
+  // Auto-focus email
+  useEffect(() => {
+    emailRef.current?.focus();
+  }, []);
+
+  // Clear error on typing
+  useEffect(() => {
+    if (error) setError("");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [email, password]);
+
+  // Lockout countdown
+  useEffect(() => {
+    if (lockoutTimer <= 0) return;
+    const interval = setInterval(() => {
+      setLockoutTimer((prev) => prev - 1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [lockoutTimer]);
+
+  const handleEmailBlur = () => {
+    if (email) {
+      const result = validateFieldImmediate("email", () => validateEmail(email)) as EmailValidationResult;
+      if (result.suggestion) {
+        setEmailSuggestion(result.suggestion);
+      } else {
+        setEmailSuggestion(null);
+      }
+    }
+  };
+
+  const applyEmailSuggestion = () => {
+    if (emailSuggestion) {
+      setEmail(emailSuggestion);
+      setEmailSuggestion(null);
+      validateFieldImmediate("email", () => validateEmail(emailSuggestion));
+    }
+  };
+
+  const isLockedOut = lockoutTimer > 0;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isLockedOut) return;
+
     setError("");
+    const emailCheck = validateFieldImmediate("email", () => validateEmail(email));
+    if (!emailCheck.isValid) return;
+
     setIsLoading(true);
+    
+    try {
+      // 1. Primary Authentication
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
 
-    // Simulate auth delay
-    await new Promise((r) => setTimeout(r, 1500));
+      // 2. Fetch User Document to Gate Role Access
+      const userDocRef = doc(db, "users", user.uid);
+      const userSnapshot = await getDoc(userDocRef);
 
-    // TODO: Replace with real Firebase Admin auth
-    if (email === "admin@nexiv.com" && password === "admin123") {
-      router.push("/admin");
-    } else {
-      setError("Invalid credentials. Admin access only.");
+      if (userSnapshot.exists()) {
+        const data = userSnapshot.data();
+        if (data.role === "admin") {
+          // Admin successfully authenticated & authorized
+          setFailedAttempts(0);
+          await refreshProfile();
+          setIsLoading(false);
+          router.push("/admin");
+        } else {
+          // Deny non-admin and instantly kill current auth session
+          await signOut(auth);
+          throw new Error("unauthorized-role");
+        }
+      } else {
+        // User exists in Auth but profile doesn't exist - assume unauthorized
+        await signOut(auth);
+        throw new Error("unauthorized-role");
+      }
+
+    } catch (err: any) {
       setIsLoading(false);
+      console.error("Admin login failed:", err);
+
+      const newAttempts = failedAttempts + 1;
+      setFailedAttempts(newAttempts);
+
+      // Handle security lockouts
+      if (newAttempts >= 5) {
+        setLockoutTimer(60);
+        setError(`Too many failed attempts. Account locked for 60 seconds.`);
+        return;
+      }
+
+      // Customize feedback warning
+      const isOffline = err.code === "unavailable" || err.message?.toLowerCase().includes("offline");
+
+      if (isOffline) {
+        setError("Connection lost. Please check your network connection and try again.");
+      } else if (err.message === "unauthorized-role") {
+        setError("Access denied. Account does not have administrative privileges.");
+      } else if (err.code === "auth/user-not-found" || err.code === "auth/wrong-password" || err.code === "auth/invalid-credential") {
+        if (newAttempts >= 3) {
+          setError(`Invalid credentials. ${5 - newAttempts} attempt(s) remaining before lockout.`);
+        } else {
+          setError("Invalid credentials. Admin access only.");
+        }
+      } else if (err.code === "auth/too-many-requests") {
+        setLockoutTimer(120);
+        setError("Platform heavily throttled. Try again in a few minutes.");
+      } else {
+        setError("Authorization failed. Please contact platform operations.");
+      }
     }
   };
 
@@ -101,35 +218,61 @@ export default function AdminLoginPage() {
 
           {/* Error message */}
           {error && (
-            <div className="mb-6 flex items-center gap-3 px-4 py-3 rounded-xl bg-red-50 border border-red-100 text-red-600">
+            <div className={`mb-6 flex items-center gap-3 px-4 py-3 rounded-xl border animate-slide-down ${
+              isLockedOut 
+                ? "bg-amber-50 border-amber-100 text-amber-700" 
+                : "bg-red-50 border-red-100 text-red-600"
+            }`} role="alert">
               <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                {isLockedOut ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                )}
               </svg>
               <span className="text-sm font-semibold">{error}</span>
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Email */}
+          {/* Lockout countdown */}
+          {isLockedOut && (
+            <div className="mb-6 text-center">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-50 text-amber-600 text-sm font-bold">
+                <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                </svg>
+                Try again in {lockoutTimer}s
+              </div>
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+            {/* Email — clear, non-jargon label */}
             <div>
-              <label htmlFor="admin-email" className="block text-sm font-bold text-[#1A1A1A] mb-2">
-                Corporate Identity
-              </label>
-              <input
+              <FormInput
+                label="Email address"
                 id="admin-email"
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => {
+                  setEmail(e.target.value.trim());
+                  setEmailSuggestion(null);
+                }}
                 placeholder="admin@nexiv.com"
-                required
-                className="w-full px-4 py-3.5 rounded-xl bg-[#FAFAFA] border border-gray-200 text-[#1A1A1A] text-[15px] placeholder:text-gray-400 focus:outline-none focus:border-[#FF4B3A] focus:ring-1 focus:ring-[#FF4B3A] transition-all duration-200"
+                required={true}
+                disabled={isLockedOut}
+                autoComplete="email"
+                suggestion={emailSuggestion}
+                onSuggestionApply={applyEmailSuggestion}
+                error={emailState.touched && !emailState.isValid ? emailState.message : null}
               />
             </div>
 
-            {/* Password */}
+            {/* Password — clear, non-jargon label */}
             <div>
               <label htmlFor="admin-password" className="block text-sm font-bold text-[#1A1A1A] mb-2">
-                Access Code
+                Password
               </label>
               <div className="relative">
                 <input
@@ -139,12 +282,15 @@ export default function AdminLoginPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••••"
                   required
-                  className="w-full px-4 py-3.5 rounded-xl bg-[#FAFAFA] border border-gray-200 text-[#1A1A1A] text-[15px] placeholder:text-gray-400 focus:outline-none focus:border-[#FF4B3A] focus:ring-1 focus:ring-[#FF4B3A] transition-all duration-200 pr-12"
+                  autoComplete="current-password"
+                  disabled={isLockedOut}
+                  className="w-full px-4 py-3.5 rounded-xl bg-[#FAFAFA] border border-gray-200 text-[#1A1A1A] text-[15px] placeholder:text-gray-400 focus:outline-none focus:border-[#FF4B3A] focus:ring-1 focus:ring-[#FF4B3A] transition-all duration-200 pr-12 disabled:opacity-50 disabled:cursor-not-allowed"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#1A1A1A] transition-colors"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
                 >
                   {showPassword ? (
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -160,11 +306,18 @@ export default function AdminLoginPage() {
               </div>
             </div>
 
+            {/* Failed attempts warning */}
+            {failedAttempts > 0 && failedAttempts < 3 && !isLockedOut && (
+              <p className="text-[11px] text-[#A1A1A1] text-center animate-slide-down">
+                {5 - failedAttempts} of 5 attempts remaining
+              </p>
+            )}
+
             {/* Submit button */}
             <button
               type="submit"
-              disabled={isLoading || !email || !password}
-              className="w-full py-4 mt-2 rounded-xl text-[16px] font-bold text-white bg-[#1A1A1A] hover:bg-[#000000] hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 shadow-lg"
+              disabled={isLoading || !email || !password || isLockedOut}
+              className="w-full py-4 mt-2 rounded-xl text-[16px] font-bold text-white bg-[#1A1A1A] hover:bg-[#000000] hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 transition-all duration-300 shadow-lg"
             >
               {isLoading ? (
                 <span className="flex items-center justify-center gap-2">

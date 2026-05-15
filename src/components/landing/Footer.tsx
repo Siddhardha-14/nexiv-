@@ -6,7 +6,6 @@ const footerLinks = {
   Product: [
     { label: "Skill Tracks", href: "#tracks" },
     { label: "Projects", href: "#projects" },
-    { label: "Pricing", href: "#pricing" },
     { label: "Certificates", href: "#" },
     { label: "Portfolio", href: "#" },
   ],

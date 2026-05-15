@@ -16,7 +16,6 @@ export default function Navbar() {
   const navLinks = [
     { label: "Tracks", href: "#tracks" },
     { label: "Projects", href: "#projects" },
-    { label: "Pricing", href: "#pricing" },
     { label: "FAQ", href: "#faq" },
   ];
 
@@ -45,7 +44,7 @@ export default function Navbar() {
             <a
               key={link.label}
               href={link.href}
-              className="text-[#575757] hover:text-[#FF4B3A] transition-colors duration-200 text-[15px] font-medium"
+              className="text-[var(--color-muted)] hover:text-[var(--color-accent)] transition-colors duration-200 text-[15px] font-medium"
             >
               {link.label}
             </a>
